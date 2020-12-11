@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1.title-api-documentation {
+    font-size: 25px;
+    padding: 1.5rem 0;
+    font-weight: 600;
+}
+
+.content {
+    padding: 5rem 15rem;
+}
+
+.script-box {
+    background-color: #272822;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+pre {
+    color: #fff;
+    font-weight: 600;
+    line-height: 27px;
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.tulisan-gede {
+    font-size: 24px;
+}

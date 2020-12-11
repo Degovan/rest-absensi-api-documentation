@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Rest Absensi API DOCOUMENTATION</title>
+</head>
+<body>
+    <h1 class="text-center text-white title-api-documentation" style="background-color: #272822">DOKUMENTASI API REST ABSENSI [ DEGOVAN ]</h1>
+    <div class="content">
+        <h2 style="color: #444; font-weight: 600;">Rest Login</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest login sendiri disini menggunakan route</p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/login
+                </div>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-4">Berikut Daftar Respon API dari akses ke REST LOGIN</h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, doesn't pass validation</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route login berikut </p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/login
+                </div>
+                <p class="mt-3">Tanpa mengirimkan request email dan password, maka akan mengembalikan error respon sebagai berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "error, doesn't pass validation",
+        "data": {
+            "old_value": {
+                "email": null
+            },
+            "errors_validation": {
+                "email": [
+                    "email tidak boleh kosong"
+                ],
+                "password": [
+                    "password tidak boleh kosong"
+                ]
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+
+
+
+            <li>
+                <h6 class="font-weight-bold mt-5"><span class="tulisan-gede">Error</span>, email & password don't match</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route login berikut </p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/login
+                </div>
+                <p class="mt-3">Dan sudah mengirimkan request seperti yang diminta server, yaitu email dan password, akan tetapi tidak ada employee yang cocok dengan email & password tersebut, maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 400,
+        "success": false,
+        "message": "error, Email and password don't match",
+        "data": {
+            "old_value": {
+                "email": "hani@gmail.com"
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+            <li>
+                <h6 class="font-weight-bold mt-5"><span class="tulisan-gede">Success</span>, employee success loged in</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route login berikut </p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/login
+                </div>
+                <p class="mt-3">Dan sudah mengirimkan request seperti yang diminta server, dan cocok untuk kombinasi email dan password, maka akan mengembalikan respon seperti berikut, beserta api_token</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "token": "PZPmS8A8h5QbKCar1jyW4aJ5S4bJ3MJXSkQ5Wm3NwIo7OY7pnZNPzOI0hORc",
+        "message": "successfully, employee success logged in",
+        "data": {
+            "employee": {
+                "id": 8,
+                "employee_id": "KJN407386912",
+                "school_id": 4,
+                "firstname": "HANI",
+                "lastname": "NURAENI",
+                "address": "KP. ASDJAS",
+                "birthdate": "2020-09-14",
+                "tgl_masuk": "2020-11-09",
+                "contact_info": "081283314115",
+                "noktp": "3123113",
+                "nik": 313123,
+                "gaji_pokok": 4200000,
+                "pendidikan": "S1",
+                "domisi": "asdadad",
+                "gender": "FEMALE",
+                "position_id": 72,
+                "schedule_id": 2,
+                "jadwal_id": 1,
+                "cabang_id": 2,
+                "status_id": 2,
+                "hpsodara": "3123123",
+                "namaso": "dadasdas",
+                "alamat": "asdasdad",
+                "bank": "asdadasd",
+                "norek": "312313123",
+                "namab": "HANI NURAENI",
+                "photo": "daadasd",
+                "created_on": "2020-11-04",
+                "email": "hani@gmail.com",
+                "active": "Y",
+                "school": {
+                    "id": 4,
+                    "school_name": "KSP WAHYU ARTA SEJAHTERA"
+                }
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Logout</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest logout sendiri disini menggunakan route</p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/logout
+                </div>
+                <p class="mt-3" style="color: #555">Dan data yang wajib dikirimkan adalah api_token seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "PZPmS8A8h5QbKCar1jyW4aJ5S4bJ3MJXSkQ5Wm3NwIo7OY7pnZNPzOI0hORc"
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-4">Berikut Daftar Respon API dari akses ke REST LOGOUT</h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Success</span>, logout action</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route logout berikut </p>
+                <div class="script-box text-white">
+                    POST  http://restabsen.wahyuartadigital.com/api/v2/logout
+                </div>
+                <p class="mt-3">dan mengirimkan data api_token yang cocok, maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "message": "successfully, the employee has been logged out and api_token has been removed"
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Autentifikasi AUTH USER ( api_token )</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest autentifikasi sendiri disini untuk setiap request wajib mengirimkan data api_token dari client</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "PZPmS8A8h5QbKCar1jyW4aJ5S4bJ3MJXSkQ5Wm3NwIo7OY7pnZNPzOI0hORc"
+    }
+</pre>
+                </div>
+                <p class="mt-3" style="color: #555">Sebagai contoh disini kita mencoba mengambil data karyawan, yang dimana jika kita ingin mengakses route tersebut diwajibkan kita untuk login terlebih dahulu ( autentifikasi )</p>
+                <div class="script-box text-white">
+                    GET http://restabsen.wahyuartadigital.com/api/v2/karyawan
+                </div>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-4">Berikut Daftar Respon API dari akses ke REST AUTENTIFIKASI</h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, api_token is required</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route data karyawan berikut </p>
+                <div class="script-box text-white">
+                    GET http://restabsen.wahyuartadigital.com/api/v2/karyawan
+                </div>
+                <p class="mt-3">tetapi tidak mengirimkan api_token, maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "api token is required"
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    </div>
+</body>
+</html>
