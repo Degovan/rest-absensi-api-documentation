@@ -256,6 +256,7 @@
             "lt" : "53356", | ~ optional ~
             "lo" : "53356",  | ~ optional ~
             "address" : "Jakarta",   | ~ optional ~  
+            "hasil_kerja" : "belum ngapa ngapain",   | ~ optional ~  
             "rencana_kerja" : [   | ~ required ~
                 {
                     "text" : "Makan Nasi",
@@ -291,7 +292,8 @@
                 "rencana_kerja": null,
                 "lt": null,
                 "lo": null,
-                "address": null
+                "address": null,
+                "hasil_kerja": null
             },
             "errors_validation": {
                 "rencana_kerja": [
@@ -332,7 +334,8 @@
                 "rencana_kerja": "ini string",
                 "lt": null,
                 "lo": null,
-                "address": null
+                "address": null,
+                "hasil_kerja": null
             },
             "errors_validation": {
                 "rencana_kerja": [
@@ -374,8 +377,9 @@
                 ],
                 "lt": null,
                 "lo": null,
-                "address": null
-            }
+                "address": null,
+                "hasil_kerja": null
+            },
         }
     }
 </pre>
@@ -420,7 +424,8 @@
                 ],
                 "lt": null,
                 "lo": null,
-                "address": null
+                "address": null,
+                "hasil_kerja": null
             }
         }
     }
@@ -508,6 +513,7 @@
                 "nohp": "081283314115",
                 "job": "MANAGER AKUTANSI BISNIS",
                 "renke": "[{\"text\":\"Makan Nasi\",\"status\":\"Progress\"},{\"text\":\"Minum Susu\",\"status\":\"Progress\"}]",
+                "hasil_kerja": "belum ngapa ngapain",
                 "status": "-",
                 "evaluasi": "-",
                 "solusi": "-"
@@ -564,7 +570,12 @@
                 <div class="script-box text-white">
                     POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-pulang
                 </div>
-                <p class="mt-3" style="color: #555">Dan data yang wajib dikirimkan, adalah api_token</p>
+                <p class="mt-3" style="color: #555">Dan data yang dikirimkan, adalah </p>
+                <ul>
+                    <li>api_token (Wajib)</li>
+                    <li>hasil_kerja ( Optional )</li>
+                    <li>rencana_kerja ( Wajib )</li>
+                </ul>
             </li>
         </ul>
         <h5 class="ml-4 mt-5">Berikut Daftar Respon API dari akses ke REST KARYAWAN ABSEN pulang </h5>
@@ -634,17 +645,34 @@
                 "active": "Y"
             },
             "absen_harian": {
-                "id": 3509,
+                "id": 3535,
                 "employee_id": 8,
-                "date": "2020-12-11",
-                "time_in": "20:46:13",
-                "status": 0,
-                "time_out": "21:00:49",
-                "num_hr": "0.14",
-                "telat": 761,
+                "date": "2020-12-12",
+                "time_in": "05:23:31",
+                "status": 1,
+                "time_out": "05:26:55",
+                "num_hr": "0.3",
+                "telat": 0,
                 "latitude": "53356",
                 "longitude": "53356",
                 "address": "Jakarta"
+            },
+            "rencana_kerja": {
+                "id": 44,
+                "date_harian": "2020-12-12",
+                "employee_id": "8",
+                "school_id": "4",
+                "cabang_id": "2",
+                "position_id": "72",
+                "lokasi_id": "1",
+                "jabker_id": "1",
+                "nohp": "081283314115",
+                "job": "MANAGER AKUTANSI BISNIS",
+                "renke": "[{\"text\":\"Makan Nasi\",\"status\":\"Selesai\"},{\"text\":\"Minum Susu\",\"status\":\"Selesai\"}]",
+                "hasil_kerja": "Yess, Selesai tugas hari ini",
+                "status": "-",
+                "evaluasi": "-",
+                "solusi": "-"
             }
         }
     }
