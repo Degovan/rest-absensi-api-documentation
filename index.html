@@ -772,7 +772,52 @@
             </li>
         </ul>
 
+        <h2 class="mt-5 font-weight-bold">CATATAN</h2>
+        <div class="catatan">
+            <ul>
+                <li>
+                    Penambahan kolom address di tabel attendance
+                    <h6 class="font-weight-bold ml-4 mt-2">alasan</h6>
+                    <ul class="ml-5 mb-3">
+                        <li>karena di mobile terdapat input yaitu address, sedangkan di tabel attendance (absen) tidak terdapat kolom yang menampung data tersebut, akhirnya saya tambahkan kolom address pada tabel tersebut</li>
+                        <li class="mt-1">Untuk tipe data di kolom address adalah ( text, nullable )</li>
+                    </ul>
+                </li>
+                <li>
+                    Pengubahan tipe data pada kolom renke yang awal nya adalah varchar menjadi longtext
+                    <h6 class="font-weight-bold ml-4 mt-2">alasan</h6>
+                    <ul class="ml-5 mb-3">
+                        <li>di kode program sebelumnya untuk menghandle data array rencana_kerja dan status, itu menggunakan perulangan lalu insert ke database. sehingga nantinya akan menghasilkan beberapa row data kolom yang memiliki nilai sama, hanya berbeda di kolom renke dan status</li>
+                        <li class="mt-1">ini berpengaruh di database nya sendiri, karena akan terjadi duplikasi data dan memenuhi kapasitas database</li>
+                        <li class="mt-1">agar kode dan database lebih efektif, jadi oleh saya kolom renke diubah menjadi tipe data longtext</li>
+                        <li class="mt-1">nanti untuk proses insert ke kolom renke, langsung saja saya parse ke json setelah itu diinput</li>
+                        <li class="mt-1">ini juga nantinya memudahkan orang bagian front end, karena untuk mengambil data renke hanya perlu melakukan perulangan data kolom, bukan perulangan data row</li>
+                    </ul>
+                </li>
+                <li>menemukan kolom yang tidak digunakan yaitu status</li>
+                <h6 class="font-weight-bold ml-4 mt-2">alasan</h6>
+                    <ul class="ml-5 mb-3">
+                        <li>nah karena hal diatas, untuk rencana_kerja dan status. Oleh saya dibuat satu kesatuan array, yang diinsert ke kolom renke</li>
+                        <li class="mt-1">sehingga saya rasa kolom status tidak digunakan</li>
+                    </ul>
+                <li>di tabel harian ( rencana_kerja ), untuk kolom lokasi_id dan jabker_id. Saya isi data statis dikarenakan di tabel employees tidak memiliki kolom yang ber relasi dengan tabel lokasi dan jabker</li>
+            </ul>
+        </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
