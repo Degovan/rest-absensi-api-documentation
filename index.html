@@ -389,7 +389,7 @@
                 <div class="script-box text-white">
                     POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
                 </div>
-                <p class="mt-3">dan sudah mengirimkan data rencana_kerja dengan format array of object, tetapi tidak menambahkan key : text dan option</p>
+                <p class="mt-3">dan sudah mengirimkan data rencana_kerja dengan format array of object, tetapi tidak menambahkan key : text dan status</p>
                 <div class="script-box text-white">
 <pre>
     {
@@ -442,29 +442,6 @@
         "code": 401,
         "success": false,
         "message": "error, the employee has made an absence"
-    }
-</pre>
-                </div>
-                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
-                <div class="script-box text-white">
-<pre>
-    {
-        "code": 401,
-        "success": false,
-        "message": "rencana kerja must be array of object and have key : text & status",
-        "data": {
-            "old_value": {
-                "rencana_kerja": [
-                    {
-                        "anime": "Naruto",
-                        "cewek": "Seseorang :)"
-                    }
-                ],
-                "lt": null,
-                "lo": null,
-                "address": null
-            }
-        }
     }
 </pre>
                 </div>
