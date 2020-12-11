@@ -218,10 +218,567 @@
 </pre>
                 </div>
             </li>
+
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, api_token is invalid</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route data karyawan berikut </p>
+                <div class="script-box text-white">
+                    GET http://restabsen.wahyuartadigital.com/api/v2/karyawan
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data api_token, tetapi tidak ada yang cocok, maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "api token is invalid"
+    }
+</pre>
+                </div>
+            </li>
         </ul>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Karyawan Absen Masuk</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest karyawan absen masuk menggunakan route</p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3" style="color: #555">Dan data yang akan dikirimkan, adalah sebagai berikut</p>
+                <div class="script-box text-white">
+    <pre>
+        {
+            "api_token" : "LWXUKPJOA7czoE07jmZR7bbNM35AGNHIC8K4Ql7K7EQLWzVpsCNKZ7UpIeCV", | ~ required ~
+            "lt" : "53356", | ~ optional ~
+            "lo" : "53356",  | ~ optional ~
+            "address" : "Jakarta",   | ~ optional ~  
+            "rencana_kerja" : [   | ~ required ~
+                {
+                    "text" : "Makan Nasi",
+                    "status" : "Progress"
+                },
+                {
+                    "text" : "Minum Susu",
+                    "status" : "Progress"
+                }
+            ]
+        }
+    </pre>
+                </div>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-4">Berikut Daftar Respon API dari akses ke REST KARYAWAN ABSENS MASUK</h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, doesn't pass validation required</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route absen masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">tetapi tidak mengirimkan data rencana_kerja, maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "error, doesn't pass validation",
+        "data": {
+            "old_value": {
+                "rencana_kerja": null,
+                "lt": null,
+                "lo": null,
+                "address": null
+            },
+            "errors_validation": {
+                "rencana_kerja": [
+                    "rencana kerja tidak boleh kosong"
+                ]
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, rencana_kerja must be array</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route absen karyawan masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data rencana_kerja dengan format string</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "LWXUKPJOA7czoE07jmZR7bbNM35AGNHIC8K4Ql7K7EQLWzVpsCNKZ7UpIeCV",
+        "rencana_kerja" : "ini string"
+    }
+</pre>
+                    </div>
+                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "error, doesn't pass validation",
+        "data": {
+            "old_value": {
+                "rencana_kerja": "ini string",
+                "lt": null,
+                "lo": null,
+                "address": null
+            },
+            "errors_validation": {
+                "rencana_kerja": [
+                    "rencana kerja harus bertipe data array"
+                ]
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, rencana_kerja must be array of object ( CASE 1 )</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route karyawan absen masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data rencana_kerja dengan format array, tetapi bukan array of object</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "LWXUKPJOA7czoE07jmZR7bbNM35AGNHIC8K4Ql7K7EQLWzVpsCNKZ7UpIeCV",
+        "rencana_kerja" : ["ini array"]
+    }
+</pre>
+                    </div>
+                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "rencana kerja must be array of object and have key : text & status",
+        "data": {
+            "old_value": {
+                "rencana_kerja": [
+                    "ini array"
+                ],
+                "lt": null,
+                "lo": null,
+                "address": null
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, rencana_kerja must be array of object ( CASE 2 )</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route karyawan absen masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data rencana_kerja dengan format array of object, tetapi tidak menambahkan key : text dan option</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "LWXUKPJOA7czoE07jmZR7bbNM35AGNHIC8K4Ql7K7EQLWzVpsCNKZ7UpIeCV",
+        "rencana_kerja" : [
+            {
+                "anime" : "Naruto",
+                "cewek" : "Seseorang :)"
+            }
+        ]
+    }
+</pre>
+                    </div>
+                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "rencana kerja must be array of object and have key : text & status",
+        "data": {
+            "old_value": {
+                "rencana_kerja": [
+                    {
+                        "anime": "Naruto",
+                        "cewek": "Seseorang :)"
+                    }
+                ],
+                "lt": null,
+                "lo": null,
+                "address": null
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, the employee has been absent</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route karyawan absen masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data rencana_kerja, tetapi saat dicek di database ternyata karyawan tersebut sudah melakukan absen pada hari tersebut maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "error, the employee has made an absence"
+    }
+</pre>
+                </div>
+                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 401,
+        "success": false,
+        "message": "rencana kerja must be array of object and have key : text & status",
+        "data": {
+            "old_value": {
+                "rencana_kerja": [
+                    {
+                        "anime": "Naruto",
+                        "cewek": "Seseorang :)"
+                    }
+                ],
+                "lt": null,
+                "lo": null,
+                "address": null
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+
+
+            <li class="mt-5">
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Success</span>, the employee absence has been created</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route karyawan absen masuk berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen
+                </div>
+                <p class="mt-3">dan sudah mengirimkan data yang sesuai seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "api_token" : "l0kTRExYoXQa5TACI5jILioRfTpPEpAjM4HhDJK94M26dwXFUAitMCu8WEPw",
+        "lt" : "53356",
+        "lo" : "53356",
+        "address" : "Jakarta",
+        "rencana_kerja" : [
+            {
+                "text" : "Makan Nasi",
+                "status" : "Progress"
+            },
+            {
+                "text" : "Minum Susu",
+                "status" : "Progress"
+            }
+        ]
+    }
+</pre>
+                </div>
+                <p class="mt-3">maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "message": "successfully, the employee absence has been created",
+        "data": {
+            "absen_harian": {
+                "id": 3509,
+                "employee_id": 8,
+                "date": "2020-12-11",
+                "time_in": "20:46:13",
+                "status": 0,
+                "time_out": null,
+                "num_hr": 0,
+                "telat": 761,
+                "latitude": "53356",
+                "longitude": "53356",
+                "address": "Jakarta"
+            },
+            "rencana_kerja": {
+                "id": 23,
+                "date_harian": "2020-12-11",
+                "employee_id": "8",
+                "school_id": "4",
+                "cabang_id": "2",
+                "position_id": "72",
+                "lokasi_id": "1",
+                "jabker_id": "1",
+                "nohp": "081283314115",
+                "job": "MANAGER AKUTANSI BISNIS",
+                "renke": "[{\"text\":\"Makan Nasi\",\"status\":\"Progress\"},{\"text\":\"Minum Susu\",\"status\":\"Progress\"}]",
+                "status": "-",
+                "evaluasi": "-",
+                "solusi": "-"
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+
+
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Karyawan Absen Masuk ( DELETE )</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest karyawan absen masuk ( DELETE ) menggunakan route</p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen/delete
+                </div>
+                <p class="mt-3" style="color: #555">Dan data yang wajib dikirimkan, adalah api_token</p>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-5">Berikut Daftar Respon API dari akses ke REST KARYAWAN ABSEN MASUK ( DELETE ) </h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Success</span>, delete last this day absen masuk</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route absen masuk ( DELETE ) berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-absen/delete
+                </div>
+                <p class="mt-3">maka akan melakukan aksi, menghapus absen karyawan tersebut pada hari itu. Dan akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "message": "successfully, the employee absent has been deleted"
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Karyawan Absen Pulang</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest karyawan absen pulang menggunakan route</p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-pulang
+                </div>
+                <p class="mt-3" style="color: #555">Dan data yang wajib dikirimkan, adalah api_token</p>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-5">Berikut Daftar Respon API dari akses ke REST KARYAWAN ABSEN pulang </h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Error</span>, employee have not been absent</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route absen pulang berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-pulang
+                </div>
+                <p class="mt-3">dan ternyata karyawan tersebut belum melakukan login. Maka akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 404,
+        "success": false,
+        "message": "error, the employee has not been absent"
+    }
+</pre>
+                </div>
+            </li>
+
+            <li>
+                <h6 class="font-weight-bold mt-5"><span class="tulisan-gede">Success</span>, the employee absence has been updated</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route absen pulang berikut </p>
+                <div class="script-box text-white">
+                    POST http://restabsen.wahyuartadigital.com/api/v2/karyawan-pulang
+                </div>
+                <p class="mt-3">maka akan melakukan aksi, update time_out dan juga update num_hr. Dan akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "message": "successfully, the employee has made an absence return back to home",
+        "data": {
+            "employee": {
+                "id": 8,
+                "employee_id": "KJN407386912",
+                "school_id": 4,
+                "firstname": "HANI",
+                "lastname": "NURAENI",
+                "address": "KP. ASDJAS",
+                "birthdate": "2020-09-14",
+                "tgl_masuk": "2020-11-09",
+                "contact_info": "081283314115",
+                "noktp": "3123113",
+                "nik": 313123,
+                "gaji_pokok": 4200000,
+                "pendidikan": "S1",
+                "domisi": "asdadad",
+                "gender": "FEMALE",
+                "position_id": 72,
+                "schedule_id": 2,
+                "jadwal_id": 1,
+                "cabang_id": 2,
+                "status_id": 2,
+                "hpsodara": "3123123",
+                "namaso": "dadasdas",
+                "alamat": "asdasdad",
+                "bank": "asdadasd",
+                "norek": "312313123",
+                "namab": "HANI NURAENI",
+                "photo": "daadasd",
+                "created_on": "2020-11-04",
+                "email": "hani@gmail.com",
+                "active": "Y"
+            },
+            "absen_harian": {
+                "id": 3509,
+                "employee_id": 8,
+                "date": "2020-12-11",
+                "time_in": "20:46:13",
+                "status": 0,
+                "time_out": "21:00:49",
+                "num_hr": "0.14",
+                "telat": 761,
+                "latitude": "53356",
+                "longitude": "53356",
+                "address": "Jakarta"
+            }
+        }
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
+
+
+        <h2 class="mt-5 pt-5" style="color: #444; font-weight: 600;">Rest Karyawan Data Karyawan</h2>
+        <ul>
+            <li>
+                <p class="mt-3" style="color: #555">Untuk Rest data karyawan menggunakan route</p>
+                <div class="script-box text-white">
+                    GET http://restabsen.wahyuartadigital.com/api/v2/karyawan
+                </div>
+                <p class="mt-3" style="color: #555">Dan data yang wajib dikirimkan, adalah api_token</p>
+            </li>
+        </ul>
+        <h5 class="ml-4 mt-5">Berikut Daftar Respon API dari akses ke REST KARYAWAN data karyawan </h5>
+        <ul class="mt-4">
+            <li>
+                <h6 class="font-weight-bold"><span class="tulisan-gede">Success</span>, get data karyawan</h6>
+                <p class="mt-3" style="color: #555">Apabila mengakses ke route data karyawan berikut </p>
+                <div class="script-box text-white">
+                    GET http://restabsen.wahyuartadigital.com/api/v2/karyawan
+                </div>
+                <p class="mt-3">maka akan melakukan aksi mengembalikan data karyawan yang sedang login tersebut, dan akan mengembalikan respon seperti berikut</p>
+                <div class="script-box text-white">
+<pre>
+    {
+        "code": 200,
+        "success": true,
+        "message": "successfully, employee data found",
+        "data": {
+            "employee": [
+                {
+                    "id": 8,
+                    "employee_id": "KJN407386912",
+                    "school_id": 4,
+                    "firstname": "HANI",
+                    "lastname": "NURAENI",
+                    "address": "KP. ASDJAS",
+                    "birthdate": "2020-09-14",
+                    "tgl_masuk": "2020-11-09",
+                    "contact_info": "081283314115",
+                    "noktp": "3123113",
+                    "nik": 313123,
+                    "gaji_pokok": 4200000,
+                    "pendidikan": "S1",
+                    "domisi": "asdadad",
+                    "gender": "FEMALE",
+                    "position_id": 72,
+                    "schedule_id": 2,
+                    "jadwal_id": 1,
+                    "cabang_id": 2,
+                    "status_id": 2,
+                    "hpsodara": "3123123",
+                    "namaso": "dadasdas",
+                    "alamat": "asdasdad",
+                    "bank": "asdadasd",
+                    "norek": "312313123",
+                    "namab": "HANI NURAENI",
+                    "photo": "daadasd",
+                    "created_on": "2020-11-04",
+                    "email": "hani@gmail.com",
+                    "active": "Y",
+                    "school": {
+                        "id": 4,
+                        "school_name": "KSP WAHYU ARTA SEJAHTERA"
+                    },
+                    "position": {
+                        "id": 72,
+                        "description": "MANAGER AKUTANSI BISNIS",
+                        "rate": 23444
+                    },
+                    "schedule": {
+                        "id": 2,
+                        "time_in": "08:05:00",
+                        "time_out": "17:00:00"
+                    },
+                    "jadwal": {
+                        "id": 1,
+                        "time_in": "08:05:00",
+                        "time_out": "17:00:00"
+                    },
+                    "cabang": {
+                        "id": 2,
+                        "namanya": "DEPOK"
+                    },
+                    "status": {
+                        "id": 2,
+                        "jenis": "Karyawan Tetap"
+                    }
+                }
+            ]
+        }
+    }
+</pre>
+                </div>
+            </li>
+        </ul>
+
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <footer>
+        <span>Created BY DEGOVAN</span>
+    </footer>
 </body>
 </html>

@@ -34,3 +34,17 @@ pre {
 .tulisan-gede {
     font-size: 24px;
 }
+
+footer {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    background-color: #272822;
+    color: #fff;
+}
+
+footer span {
+    font-weight: 600;
+}
