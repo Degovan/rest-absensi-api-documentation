@@ -48,3 +48,13 @@ footer {
 footer span {
     font-weight: 600;
 }
+
+@media screen and (max-width: 991px) {
+    h1.title-api-documentation {
+        font-size: 18px;
+    }
+
+    .content {
+        padding: 2rem 2.5rem;
+    }
+}
