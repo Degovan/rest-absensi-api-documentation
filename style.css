@@ -5,6 +5,11 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+body {
+    width: 100vw;
+    overflow: hidden;
+}
+
 h1.title-api-documentation {
     font-size: 25px;
     padding: 1.5rem 0;
